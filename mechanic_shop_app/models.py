@@ -34,3 +34,14 @@ class ServiceTicket(db.Model):
     problem_reported = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(50), nullable=False)
     total_cost = db.Column(db.Numeric(10, 2), nullable=False)
+    
+class Mechanic(db.Model):
+    __tablename__="mechanics"
+    
+    mechanic_id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    salary = db.Column(db.Numeric(10, 2), nullable=False)
