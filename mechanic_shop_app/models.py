@@ -9,6 +9,8 @@ class Customer(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     address = db.Column(db.String(255), nullable=False)
+    vehicles = db.relationship("Vehicle", backref="customer")
+    service_tickets = db.relationship("ServiceTicket", backref="customer")
     
 class Vehicle(db.Model):
     __tablename__ = "vehicles"
@@ -21,6 +23,7 @@ class Vehicle(db.Model):
     year = db.Column(db.Integer, nullable=False)
     license_plate = db.Column(db.String(20), nullable=False)
     color = db.Column(db.String(30))
+    service_tickets = db.relationship("ServiceTicket", backref="vehicle")
     
 class ServiceTicket(db.Model):
     __tablename__ ="service_tickets"
@@ -34,6 +37,7 @@ class ServiceTicket(db.Model):
     problem_reported = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(50), nullable=False)
     total_cost = db.Column(db.Numeric(10, 2), nullable=False)
+    service_mechanics = db.relationship("ServiceMechanic", backref="service_ticket")
     
 class Mechanic(db.Model):
     __tablename__="mechanics"
@@ -45,6 +49,7 @@ class Mechanic(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     salary = db.Column(db.Numeric(10, 2), nullable=False)
+    service_mechanics = db.relationship("ServiceMechanic", backref="mechanic")
     
 class ServiceMechanic(db.Model):
     __tablename__="service_mechanics"
