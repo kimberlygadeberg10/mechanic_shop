@@ -1,3 +1,7 @@
+# Mechanic Shop ERD
+
+## ERD Diagram
+
 ```mermaid
 erDiagram
     CUSTOMERS ||--o{ VEHICLES : owns
@@ -53,13 +57,13 @@ erDiagram
         int mechanic_id PK
         decimal hours_worked
     }
+```
 
-    Relationships {
-        One customer can own many vehicles.
-        One customer can have many service tickets.
-        One vehicle can have many service tickets.
-        One service ticket belongs to one customer.
-        One service ticket belongs to one vehicle.
-        One service ticket can involve many mechanics.
-        One mechanic can woro on many service tickets.
-    }
+## Relationships
+- One customer can own many vehicles.
+- One customer can have many service tickets.
+- One vehicle can have many service tickets.
+- One service ticket belongs to one customer.
+- One service ticket belongs to one vehicle.
+- One service ticket can involve many mechanics.
+- One mechanic can work on many service tickets.
