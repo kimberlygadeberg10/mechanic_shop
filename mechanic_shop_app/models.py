@@ -45,3 +45,10 @@ class Mechanic(db.Model):
     phone = db.Column(db.String(20), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     salary = db.Column(db.Numeric(10, 2), nullable=False)
+    
+class ServiceMechanic(db.Model):
+    __tablename__="service_mechanics"
+    
+    ticket_id = db.Column(db.Integer, db.ForeignKey("service_tickets.ticket_id"), primary_key=True)
+    mechanic_id = db.Column(db.Integer, db.ForeignKey("mechanics.mechanic_id"), primary_key=True)
+    hours_worked = db.Column(db.Numeric(5, 2), nullable=False)
