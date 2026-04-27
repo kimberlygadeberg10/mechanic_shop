@@ -38,6 +38,7 @@ class ServiceTicket(db.Model):
     status = db.Column(db.String(50), nullable=False)
     total_cost = db.Column(db.Numeric(10, 2), nullable=False)
     service_mechanics = db.relationship("ServiceMechanic", backref="service_ticket")
+    mechanics = db.relationship("Mechanic", secondary="service_mechanics", back_populates="service_tickets")
     
 class Mechanic(db.Model):
     __tablename__="mechanics"
@@ -50,10 +51,11 @@ class Mechanic(db.Model):
     address = db.Column(db.String(255), nullable=False)
     salary = db.Column(db.Numeric(10, 2), nullable=False)
     service_mechanics = db.relationship("ServiceMechanic", backref="mechanic")
+    service_tickets = db.relationship("ServiceTicket", secondary="service_mechanics", back_populates="mechanics")
     
 class ServiceMechanic(db.Model):
     __tablename__="service_mechanics"
     
     ticket_id = db.Column(db.Integer, db.ForeignKey("service_tickets.ticket_id"), primary_key=True)
     mechanic_id = db.Column(db.Integer, db.ForeignKey("mechanics.mechanic_id"), primary_key=True)
-    hours_worked = db.Column(db.Numeric(5, 2), nullable=False)
+    hours_worked = db.Column(db.Numeric(5, 2), nullable=True)

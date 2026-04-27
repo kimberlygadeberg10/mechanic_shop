@@ -1,6 +1,8 @@
 from flask import Flask
 from extensions import db
 from app.routes import register_routes
+from app.mechanics import mechanics_bp
+from app.service_tickets import service_tickets_bp
 
 def create_app():
     app = Flask(__name__)
@@ -15,5 +17,7 @@ def create_app():
         db.create_all()
         
     register_routes(app)
+    app.register_blueprint(mechanics_bp, url_prefix="/mechanics")
+    app.register_blueprint(service_tickets_bp, url_prefix="/service-tickets")
         
     return app
